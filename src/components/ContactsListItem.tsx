@@ -25,6 +25,7 @@ interface IProps {
 const ContactsListItem: FC<IProps> = ({ contact }) => {
   const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
   const [isDeleteSending, setIsDeleteSending] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const handleShowDeleteDialog = () => {
     setIsDeleteDialogShown(true);
@@ -32,16 +33,22 @@ const ContactsListItem: FC<IProps> = ({ contact }) => {
 
   const handleCloseDeleteDialog = () => {
     setIsDeleteDialogShown(false);
+    setIsError(false);
   };
 
   const dispatch = useAppDispatch();
 
   const handleDeleteDialolg = () => {
+    setIsError(false);
     setIsDeleteSending(true);
     apiService
       .deleteContact(contact.id)
       .then(() => {
+        setIsDeleteDialogShown(false);
         dispatch(contactsActions.loadContacts());
+      })
+      .catch(() => {
+        setIsError(true);
       })
       .finally(() => {
         setIsDeleteSending(false);
@@ -63,6 +70,15 @@ const ContactsListItem: FC<IProps> = ({ contact }) => {
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Are you sure you want to delete this contact?
+            {isError && (
+              <>
+                <br />
+                <b>
+                  An error occurred while deleting the contact. Please try again
+                  or refresh the page.
+                </b>
+              </>
+            )}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
