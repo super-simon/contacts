@@ -11,6 +11,7 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import { FC, useState } from "react";
 import { IContactItem } from "../models/IContactItem";
@@ -55,7 +56,6 @@ const ContactsListItem: FC<IProps> = ({ contact }) => {
       });
   };
 
-  console.log("contact", contact);
   return (
     <>
       <Dialog
@@ -108,30 +108,36 @@ const ContactsListItem: FC<IProps> = ({ contact }) => {
                 ? contact.fields["last name"][0].value
                 : ""
             }`}
-            src="/static/images/avatar/1.jpg"
+            src={contact.avatar_url}
           />
         </ListItemAvatar>
         <ListItemText
+          disableTypography
           primary={
-            <b>
-              {contact.fields["first name"]
-                ? contact.fields["first name"][0].value
-                : ""}{" "}
-              {contact.fields["last name"]
-                ? contact.fields["last name"][0].value
-                : ""}
-            </b>
+            <Typography>
+              <b>
+                {contact.fields["first name"]
+                  ? contact.fields["first name"][0].value
+                  : ""}{" "}
+                {contact.fields["last name"]
+                  ? contact.fields["last name"][0].value
+                  : ""}
+              </b>
+            </Typography>
           }
           secondary={
-            <>
-              <em>
-                {contact.fields["email"] && contact.fields["email"][0].value}{" "}
-              </em>
-
-              {contact.tags.map((tag) => (
-                <li key={tag.id}>{tag.tag}</li>
-              ))}
-            </>
+            <div>
+              <Typography>
+                <em>
+                  {contact.fields["email"] && contact.fields["email"][0].value}{" "}
+                </em>
+              </Typography>
+              <ul>
+                {contact.tags.map((tag) => (
+                  <li key={tag.id}>{tag.tag}</li>
+                ))}
+              </ul>
+            </div>
           }
         />
       </ListItem>

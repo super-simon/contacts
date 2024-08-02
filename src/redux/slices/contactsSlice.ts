@@ -8,6 +8,8 @@ type ContactsSliceType = {
   page: number;
   totalPages: number | null;
   totalResults: number | null;
+  isLoading: boolean;
+  error: string;
 };
 
 const contactsInitialState: ContactsSliceType = {
@@ -15,6 +17,8 @@ const contactsInitialState: ContactsSliceType = {
   page: -1,
   totalPages: null,
   totalResults: null,
+  isLoading: false,
+  error: "",
 };
 
 const loadContacts = createAsyncThunk(
@@ -45,6 +49,15 @@ export const contactsSlice = createSlice({
       state.totalPages = action.payload?.meta.pages || null;
       state.totalResults = action.payload?.meta.total || null;
       state.contacts = action.payload?.resources || [];
+      state.isLoading = false;
+    });
+    builder.addCase(loadContacts.rejected, (state) => {
+      state.error = "An error occurred while loading contacts. Try to refresh.";
+      state.isLoading = false;
+    });
+    builder.addCase(loadContacts.pending, (state) => {
+      state.error = "";
+      state.isLoading = true;
     });
   },
 });
