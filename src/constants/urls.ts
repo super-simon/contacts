@@ -5,8 +5,8 @@ const urls = {
   contacts: {
     list: "/contacts",
     create: "/contact",
-    details: (id: string | number) => `/contacts/${id}`,
-    delete: (id: string | number) => `/contacts/${id}`,
+    details: (id: string | number) => `/contact/${id}`,
+    delete: (id: string | number) => `/contact/${id}`,
   },
 };
 

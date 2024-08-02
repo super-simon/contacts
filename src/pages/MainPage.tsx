@@ -1,4 +1,6 @@
+import { Grid } from "@mui/material";
 import { useEffect } from "react";
+import ContactForm from "../components/ContactForm";
 import ContactsList from "../components/ContactsList";
 import { contactsActions } from "../redux/slices/contactsSlice";
 import { useAppDispatch } from "../redux/store";
@@ -10,7 +12,14 @@ const MainPage = () => {
   }, []);
   return (
     <>
-      <ContactsList />
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={3}>
+          <ContactForm />
+        </Grid>
+        <Grid item xs={12} sm={9}>
+          <ContactsList />
+        </Grid>
+      </Grid>
     </>
   );
 };

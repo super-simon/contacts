@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { baseURL, urls } from "../constants/urls";
 
+import { IContactCreate } from "../models/IContactCreate";
 import { IContactItem } from "../models/IContactItem";
 import { IContactResponse } from "../models/IContactResponse";
 import { IContactsResponse } from "../models/IContactsResponse";
@@ -32,23 +33,18 @@ export const apiService = {
     return res;
   },
 
-  createContact: async ({
-    query,
-  }: {
-    query: string;
-  }): Promise<AxiosResponse<IContactItem>> => {
+  createContact: async (
+    data: IContactCreate,
+  ): Promise<AxiosResponse<IContactItem>> => {
     const res = await axiosInstance.post<IContactItem>(
-      urls.contacts.create + query,
+      urls.contacts.create,
+      data,
     );
     return res;
   },
 
-  deleteContact: async ({
-    id,
-  }: {
-    id: string | number;
-  }): Promise<AxiosResponse<IContactItem>> => {
-    const res = await axiosInstance.post<IContactItem>(
+  deleteContact: async (id: string): Promise<AxiosResponse<IContactItem>> => {
+    const res = await axiosInstance.delete<IContactItem>(
       urls.contacts.delete(id),
     );
     return res;

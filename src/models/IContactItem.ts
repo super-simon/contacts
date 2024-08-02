@@ -89,16 +89,26 @@ export interface IContactItem {
   created: string;
   creator: string;
   fields: {
-    [key: string]: [
+    "first name": [
       {
         field_id: string;
+        label: string;
         modifier: string;
         value: string;
       },
     ];
-    property2: [
+    "last name": [
       {
         field_id: string;
+        label: string;
+        modifier: string;
+        value: string;
+      },
+    ];
+    email: [
+      {
+        field_id: string;
+        label: string;
         modifier: string;
         value: string;
       },

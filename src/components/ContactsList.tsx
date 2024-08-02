@@ -1,3 +1,4 @@
+import { List, Typography } from "@mui/material";
 import { useAppSelector } from "../redux/store";
 import ContactsListItem from "./ContactsListItem";
 
@@ -6,13 +7,14 @@ const ContactsList = () => {
   console.log(contacts);
   return (
     <>
-      <ul>
+      <Typography variant="h5" gutterBottom>
+        Concacts
+      </Typography>
+      <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
         {contacts.map((contact) => (
-          <li key={contact.id}>
-            <ContactsListItem contact={contact} />
-          </li>
+          <ContactsListItem contact={contact} key={contact.id} />
         ))}
-      </ul>
+      </List>
     </>
   );
 };
