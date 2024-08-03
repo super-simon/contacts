@@ -7,7 +7,6 @@ import TagForm from "../components/TagForm";
 import Tags from "../components/Tags";
 import { IContactItem } from "../models/IContactItem";
 import { apiService } from "../services/api.service";
-import "./ContactPage.css";
 
 const ContactPage = () => {
   const { id } = useParams();
