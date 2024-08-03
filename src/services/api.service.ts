@@ -5,6 +5,7 @@ import { IContactCreate } from "../models/IContactCreate";
 import { IContactItem } from "../models/IContactItem";
 import { IContactResponse } from "../models/IContactResponse";
 import { IContactsResponse } from "../models/IContactsResponse";
+import { ITag } from "../models/Tag";
 
 const axiosInstance = axios.create({
   baseURL,
@@ -22,11 +23,9 @@ export const apiService = {
     return res;
   },
 
-  getContactDetails: async ({
-    id,
-  }: {
-    id: string | number;
-  }): Promise<AxiosResponse<IContactResponse>> => {
+  getContactDetails: async (
+    id: string,
+  ): Promise<AxiosResponse<IContactResponse>> => {
     const res = await axiosInstance.get<IContactResponse>(
       urls.contacts.details(id),
     );
@@ -47,6 +46,13 @@ export const apiService = {
     const res = await axiosInstance.delete<IContactItem>(
       urls.contacts.delete(id),
     );
+    return res;
+  },
+
+  addTag: async (contactId: string, tags: string[]) => {
+    const res = await axiosInstance.put<ITag>(urls.tags.add(contactId), {
+      tags,
+    });
     return res;
   },
 };

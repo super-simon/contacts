@@ -14,10 +14,12 @@ import {
   Typography,
 } from "@mui/material";
 import { FC, useState } from "react";
+import { Link } from "react-router-dom";
 import { IContactItem } from "../models/IContactItem";
 import { contactsActions } from "../redux/slices/contactsSlice";
 import { useAppDispatch } from "../redux/store";
 import { apiService } from "../services/api.service";
+import Tags from "./Tags";
 
 interface IProps {
   contact: IContactItem;
@@ -98,31 +100,36 @@ const ContactsListItem: FC<IProps> = ({ contact }) => {
         secondaryAction={<Button onClick={handleShowDeleteDialog}>x</Button>}
       >
         <ListItemAvatar>
-          <Avatar
-            alt={`${
-              contact.fields["first name"]
-                ? contact.fields["first name"][0].value
-                : ""
-            } ${
-              contact.fields["last name"]
-                ? contact.fields["last name"][0].value
-                : ""
-            }`}
-            src={contact.avatar_url}
-          />
+          <Link to={`/contact/${contact.id}`}>
+            <Avatar
+              alt={`${
+                contact.fields["first name"]
+                  ? contact.fields["first name"][0].value
+                  : ""
+              } ${
+                contact.fields["last name"]
+                  ? contact.fields["last name"][0].value
+                  : ""
+              }`}
+              src={contact.avatar_url}
+            />
+          </Link>
         </ListItemAvatar>
         <ListItemText
           disableTypography
           primary={
-            <Typography>
-              <b>
+            <Typography variant="h6">
+              <Link
+                to={`/contact/${contact.id}`}
+                style={{ color: "black", textDecoration: "none" }}
+              >
                 {contact.fields["first name"]
                   ? contact.fields["first name"][0].value
                   : ""}{" "}
                 {contact.fields["last name"]
                   ? contact.fields["last name"][0].value
                   : ""}
-              </b>
+              </Link>
             </Typography>
           }
           secondary={
@@ -132,11 +139,7 @@ const ContactsListItem: FC<IProps> = ({ contact }) => {
                   {contact.fields["email"] && contact.fields["email"][0].value}{" "}
                 </em>
               </Typography>
-              <ul>
-                {contact.tags.map((tag) => (
-                  <li key={tag.id}>{tag.tag}</li>
-                ))}
-              </ul>
+              <Tags tags={contact.tags} />
             </div>
           }
         />

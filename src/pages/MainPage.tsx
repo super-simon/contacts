@@ -11,16 +11,14 @@ const MainPage = () => {
     dispatch(contactsActions.loadContacts());
   }, []);
   return (
-    <>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={3}>
-          <ContactForm />
-        </Grid>
-        <Grid item xs={12} md={9}>
-          <ContactsList />
-        </Grid>
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={3}>
+        <ContactForm />
       </Grid>
-    </>
+      <Grid item xs={12} md={9}>
+        <ContactsList />
+      </Grid>
+    </Grid>
   );
 };
 

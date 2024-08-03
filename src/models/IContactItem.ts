@@ -1,3 +1,5 @@
+import { ITag } from "./Tag";
+
 export interface IContactItem {
   avatar_url: string;
   children: [string];
@@ -145,7 +147,7 @@ export interface IContactItem {
     period: 0;
     triggered: true;
   };
-  tags: [{ id: string; tag: string }];
+  tags: ITag[];
   updated: string;
   updater: string;
   stages_info: [
