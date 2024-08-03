@@ -13,10 +13,10 @@ const MainPage = () => {
   return (
     <>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} md={3}>
           <ContactForm />
         </Grid>
-        <Grid item xs={12} sm={9}>
+        <Grid item xs={12} md={9}>
           <ContactsList />
         </Grid>
       </Grid>

@@ -53,7 +53,7 @@ const ContactForm = () => {
       .finally(() => setIsFormSending(false));
   };
   return (
-    <>
+    <div style={{ position: "sticky", top: "1rem" }}>
       <Typography variant="h5" gutterBottom>
         Create contact
       </Typography>
@@ -95,7 +95,7 @@ const ContactForm = () => {
           <Button type="submit">Add Contact</Button>
         )}
       </form>
-    </>
+    </div>
   );
 };
 
