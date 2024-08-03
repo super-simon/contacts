@@ -29,9 +29,9 @@ const ContactsList = () => {
 
       {isLoading && <LoadingButton loading={isLoading} disabled />}
 
-      {error !== "" && error}
+      {error && <Typography color="red">{error}</Typography>}
 
-      {!isLoading && error === "" && (
+      {!isLoading && !error && (
         <List
           sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
         >

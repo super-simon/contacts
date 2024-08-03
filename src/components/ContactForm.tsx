@@ -29,9 +29,11 @@ const ContactForm = () => {
   const dispatch = useAppDispatch();
 
   const [isFormSending, setIsFormSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const save = (data: IFormProps) => {
     setIsFormSending(true);
+    setError(null);
     const fields = {
       "first name": [
         { modifier: "", label: "first name", value: data.firstName },
@@ -44,6 +46,9 @@ const ContactForm = () => {
       .then(() => {
         reset();
         dispatch(contactsActions.loadContacts());
+      })
+      .catch(() => {
+        setError("An error occurred while submitting the form. Try again.");
       })
       .finally(() => setIsFormSending(false));
   };
@@ -83,6 +88,7 @@ const ContactForm = () => {
           label="Email"
           name={"email"}
         />
+        {error && <Typography color="red">{error}</Typography>}
         {isFormSending ? (
           <LoadingButton loading={isFormSending} disabled />
         ) : (

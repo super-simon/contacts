@@ -9,7 +9,7 @@ type ContactsSliceType = {
   totalPages: number | null;
   totalResults: number | null;
   isLoading: boolean;
-  error: string;
+  error: string | null;
 };
 
 const contactsInitialState: ContactsSliceType = {
@@ -18,7 +18,7 @@ const contactsInitialState: ContactsSliceType = {
   totalPages: null,
   totalResults: null,
   isLoading: false,
-  error: "",
+  error: null,
 };
 
 const loadContacts = createAsyncThunk(
@@ -56,7 +56,7 @@ export const contactsSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(loadContacts.pending, (state) => {
-      state.error = "";
+      state.error = null;
       state.isLoading = true;
     });
   },

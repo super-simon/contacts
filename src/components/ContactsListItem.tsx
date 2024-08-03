@@ -73,10 +73,10 @@ const ContactsListItem: FC<IProps> = ({ contact }) => {
             {isError && (
               <>
                 <br />
-                <b>
+                <Typography color="red">
                   An error occurred while deleting the contact. Please try again
                   or refresh the page.
-                </b>
+                </Typography>
               </>
             )}
           </DialogContentText>
