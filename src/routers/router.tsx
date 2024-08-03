@@ -5,7 +5,7 @@ import MainPage from "../pages/MainPage";
 
 const routes: RouteObject[] = [
   {
-    path: "",
+    path: "/contacts",
     element: <App />,
     children: [
       { path: "", element: <MainPage /> },

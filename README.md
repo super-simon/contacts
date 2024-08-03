@@ -1,3 +1,19 @@
+# Технології
+
+- React
+- React router dom
+- React hook form
+- Redux toolkit
+- Joi
+- Axios
+- Material UI
+
+Проект розгорнуто на Github Page:
+https://super-simon.github.io/contacts
+
+Перед запуском потрібно перейти за наступною адресою, щоб увімкнути проксі:
+https://cors-anywhere.herokuapp.com/https://live.devnimble.com/api/v1/contacts
+
 # Тестове завдання Контакти
 
 За допомогою цього тестового завдання, ми хочемо зрозуміти, як ви вмієте працювати з вимогами, розбиратись з новими технологіями та використовувати їх. Потрібно створити односторінковий додаток для керування контактами.

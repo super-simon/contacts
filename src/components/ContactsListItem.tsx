@@ -100,7 +100,7 @@ const ContactsListItem: FC<IProps> = ({ contact }) => {
         secondaryAction={<Button onClick={handleShowDeleteDialog}>x</Button>}
       >
         <ListItemAvatar>
-          <Link to={`/contact/${contact.id}`}>
+          <Link to={`/contacts/contact/${contact.id}`}>
             <Avatar
               alt={`${
                 contact.fields["first name"]
@@ -120,7 +120,7 @@ const ContactsListItem: FC<IProps> = ({ contact }) => {
           primary={
             <Typography variant="h6">
               <Link
-                to={`/contact/${contact.id}`}
+                to={`/contacts/contact/${contact.id}`}
                 style={{ color: "black", textDecoration: "none" }}
               >
                 {contact.fields["first name"]

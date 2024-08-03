@@ -41,7 +41,7 @@ const ContactPage = () => {
   return (
     <>
       <Button>
-        <Link to="/">Back to list</Link>
+        <Link to="/contacts">Back to list</Link>
       </Button>
       <IconButton
         color="secondary"
