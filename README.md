@@ -15,6 +15,7 @@ https://super-simon.github.io/contacts
 
 Перед запуском потрібно перейти за наступною адресою, щоб увімкнути проксі:
 https://cors-anywhere.herokuapp.com/https://live.devnimble.com/api/v1/contacts
+та натиснути "Request temporary access to th demo server
 
 # Тестове завдання Контакти
 
