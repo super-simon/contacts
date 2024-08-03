@@ -1,30 +1,83 @@
-# React + TypeScript + Vite
+# Тестове завдання Контакти
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+За допомогою цього тестового завдання, ми хочемо зрозуміти, як ви вмієте працювати з вимогами, розбиратись з новими технологіями та використовувати їх. Потрібно створити односторінковий додаток для керування контактами.
 
-Currently, two official plugins are available:
+Додаток повинен містити наступну функціональність:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Відображення списку контактів.
+   Для отримання контактів використовуйте метод
+   GET https://live.devnimble.com/api/v1/contacts https://www.nimble.com/developers/docs/#tag/Contacts/operation/list-contacts
 
-## Expanding the ESLint configuration
+Для відображення нещодавно доданих контактів, потрібно додати параметр до запиту:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```
+sort: 'created:desc',
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Картка контакту повинна відображати: avatar, first name, last name, email, contacts tags. Кнопка видалення контакту.
+Пагінація не потрібна, потрібно відобразити контакти з першої сторінки.
+
+2. Cтворення нового контакту.
+   Для створення контакту використовуйте метод
+   POST https://live.devnimble.com/api/v1/contact
+   https://www.nimble.com/developers/docs/#tag/Contacts/operation/post-contact
+
+Секція з створенням нового контакту має бути стікі, не скролитися з списком контактів на десктоп вигляді.
+
+Для простоти створюйте всі контакти з типом person, приватністю контакту видимою для всіх та без власника контакту.
+
+```
+record_type: 'person',
+privacy: {
+edit: null,
+read: null,
+},
+owner_id: null,
+```
+
+Одне з полів first name або last name має бути заповненим для створення контакту.
+Поле email повинно мати валідацію.
+
+3. Видалення контакту.
+   Використовуйте метод DELETE https://live.devnimble.com/api/v1/contact/${contactId}
+   https://www.nimble.com/developers/docs/#tag/Contacts/operation/delete-contact
+
+4. Cторінка контакту.
+   Клік на картку контакту повинен відкрити сторінку контакту, перейти на роут на зразок /contact/{id}
+
+Для отримання даних контакту використовуйте метод
+GET https://live.devnimble.com/api/v1/contact/${id}
+Сторінка контакту повинна відображати: avatar, first name, last name, email, contacts tags.
+Секцію з інпутом для додавання тегів до контакту.
+
+5. Додавання тегів до контакту.
+   Має бути можливість додати декілька тегів одночасно.
+   Використовуйте метод
+   PUT https://live.devnimble.com/api/v1/contact/${id}/tags
+   https://www.nimble.com/developers/docs/#tag/Contacts/operation/put-contact-tags
+
+Для автентифікації використовуйте Authorization хедер і токен ("Authorization: Bearer YOUR_API_KEY") для запитів.
+Token VlP9cwH6cc7Kg2LsNPXpAvF6QNmgZn
+
+У файлі package.json, додайте поле «проксі» для проксі API запитів до сервера під час розробки.
+Запитит потрібно робити у вигляді https://cors-anywhere.herokuapp.com/https://live.devnimble.com/api/v1/contacts
+
+Це допомагає уникнути проблем CORS (Cross-Origin Resource Sharing).
+Для задеплоїного застосунку, щоб уникнути проблем з CORS можна використати https://cors-anywhere.herokuapp.com/corsdemo чи будь-які альтернативи.
+
+```
+"proxy": "https://live.devnimble.com",
+```
+
+Технічні вимоги:
+Мова: JS.
+
+Стек: React, React Router, RTK, RTKQuery, Jest, Testing Library.
+Можливе використання інших допоміжних інструментів або бібліотек готових компонентів.
+
+Не обов'язково дотримуватися мокап [дизайну](https://www.figma.com/design/OJf6EpdlnAQOmL1acT4VzG/Nimble-Test), відступи/розміри/колір можуть відрізнятися, але повинен бути дотриманий основний лейаут. Максимальна ширина контейнера - 1280px, мінімальна - 400px.
+Використовуйте Tailwind CSS, або Material UI чи інші альтернативи для відображення UI. Іконки можна взяти [тут](https://fonts.google.com/icons?selected=Material+Icons).
+Додаток повинен виглядати естетично приємно.
+
+Вихідний код необхідно розмістити у відкритому репозиторії на github.
+У процесі роботи робити коміти, працюючий додаток потрібно задеплоїти на github pages чи альтернативи як netlify, heroku. Також приємно було б бачити тести.

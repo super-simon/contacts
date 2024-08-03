@@ -7,6 +7,7 @@ import TagForm from "../components/TagForm";
 import Tags from "../components/Tags";
 import { IContactItem } from "../models/IContactItem";
 import { apiService } from "../services/api.service";
+import "./ContactPage.css";
 
 const ContactPage = () => {
   const { id } = useParams();
@@ -57,7 +58,10 @@ const ContactPage = () => {
         {contact && (
           <>
             <Avatar
-              style={{ float: "left", margin: "1em" }}
+              style={{
+                float: "left",
+                margin: "1em",
+              }}
               alt={`${
                 contact.fields["first name"]
                   ? contact.fields["first name"][0].value
@@ -85,6 +89,7 @@ const ContactPage = () => {
 
             <div style={{ margin: "1em" }}>
               <Typography variant="h5">Tags</Typography>
+
               <Tags tags={contact.tags} />
 
               <TagForm
